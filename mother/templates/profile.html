@@ -3,7 +3,7 @@
 <h2>{{child.name}} Profile</h2>
     <li>Child name: {{child.name}}</li>
     <li>Child Age: {{child.age}}</li>
-<a href="">Choose Meal</a>
+<a href="{% url 'meals' child.id %}">Choose Meal</a>
 <br>
 <a href="">Read {{child.name}}'s Report</a>
 <br>

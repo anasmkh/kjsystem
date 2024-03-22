@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from mother.models import Mother,Child
-from mother.childform import ChildForm, userCreation
+from mother.childform import ChildForm, userCreation,mealForm
 
 
 def loginUser(request):
@@ -109,3 +109,20 @@ def deleteChild(request,pk):
     context = {'object': child}
     return render(request, 'deleteform.html', context)
 
+def chooseMeals(request,pk):
+    mother = request.user.mother
+    child = mother.child_set.get(id=pk)
+    form = mealForm(instance=child)
+    if request.method == 'POST':
+        form = mealForm(request.POST,instance=child)
+        if form.is_valid():
+            meal = form.save(commit=False)
+            meal.child = child
+            meal.save()
+            redirect('profile')
+        else:
+            form = mealForm()
+    context = {
+        'form':form
+    }
+    return render(request,'choose_meal.html',context)

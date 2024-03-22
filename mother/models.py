@@ -23,6 +23,16 @@ class Child(models.Model):
     def __str__(self):
         return str(self.name)
 
+class Meal(models.Model):
+    meal_types = (('meat', 'Meat'),
+                   ('milk', 'milk'))
+    child = models.ForeignKey(Child,null=True,blank=True,on_delete=models.CASCADE)
+    name = models.CharField(max_length=200,null=True,blank=True,choices=meal_types)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
+    def __str__(self):
+        return str(self.name)
+
 @receiver(post_save,sender=User)
 def userCreate(sender, instance,created,**kwargs):
     if created:
@@ -33,5 +43,4 @@ def userCreate(sender, instance,created,**kwargs):
             email=user.email,
             name = user.first_name,
         )
-
 post_save.connect(userCreate,sender=User)

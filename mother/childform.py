@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Child, Mother
+from .models import Child, Meal
 from django.contrib.auth.models import User
 
 class userCreation(UserCreationForm):
@@ -14,7 +14,7 @@ class ChildForm(forms.ModelForm):
         model = Child
         fields = '__all__'
 
-# class profileForm(forms.ModelForm):
-#     class Meta:
-#         model: Mother
-#         fields = '__all__'
+class mealForm(forms.ModelForm):
+    class Meta:
+        model: Meal
+        fields = '__all__'
