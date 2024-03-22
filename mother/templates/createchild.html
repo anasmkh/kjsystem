@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Create Child for {{ mother.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <br>
+        {{ form.name }}
+        <br>
+        <label for="age">Age:</label>
+        <br>
+        {{ form.age }}
+        <br>
+        <button type="submit">Confirm</button>
+    </form>
+</body>
+</html>

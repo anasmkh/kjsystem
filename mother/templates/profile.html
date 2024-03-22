@@ -1,0 +1,15 @@
+
+{% block content %}
+<h2>{{child.name}} Profile</h2>
+    <li>Child name: {{child.name}}</li>
+    <li>Child Age: {{child.age}}</li>
+<a href="">Choose Meal</a>
+<br>
+<a href="">Read {{child.name}}'s Report</a>
+<br>
+<a href="{% url 'updatechild' child.id %}">Update {{child.name}}'s info</a>
+<br>
+<a href="{% url 'deletechild' child.id %}">Delete {{child.name}}'s profile?</a>
+<a href="{% url 'logout' %}">LogOut</a>
+{% endblock %}
+
