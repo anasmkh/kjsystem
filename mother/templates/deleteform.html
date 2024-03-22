@@ -8,7 +8,7 @@
                 <form class="form" method="post" action="">
                     {% csrf_token %}
                      <p> Are You Sure You Want To Delete  {{object}}</p>
-                    <a class="btn btn--sub btn--lg  my-md"  href="{{request.GET.next}}">Go Back</a>
+                    <a class="btn btn--sub btn--lg  my-md"  href="{% url 'profile' object.id %}">Go Back</a>
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm" />
                 </form>
             </div>

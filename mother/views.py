@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from django.contrib.auth import login,logout,authenticate
 from mother.models import Mother,Child
-from mother.childform import ChildForm, userCreation,mealForm
+from mother.childform import ChildForm, userCreation
 
 
 def loginUser(request):
@@ -96,7 +96,8 @@ def updateChild(request,pk):
             form = ChildForm()
     context = {
         'form':form,
-        'mother':mother
+        'mother':mother,
+        'child':child
     }
     return render(request,'createchild.html',context)
 
@@ -109,21 +110,23 @@ def deleteChild(request,pk):
     context = {'object': child}
     return render(request, 'deleteform.html', context)
 
-def chooseMeals(request,pk):
+def choose_meals(request,pk):
     mother = request.user.mother
     child = mother.child_set.get(id=pk)
-    form = mealForm(instance=child)
-    if request.method == 'POST':
-        form = mealForm(request.POST,instance=child)
+    form = ChildForm(instance=child)
+    if request.method =='POST':
+        form = ChildForm(request.POST,instance=child)
         if form.is_valid():
-            meal = form.save(commit=False)
-            meal.child = child
-            meal.save()
-            redirect('profile')
+            child = form.save(commit=False)
+            child.mom = mother
+            child.save()
+            messages.success(request, 'This Meal Choosen Successfully!')
+            return redirect('mother')
         else:
-            form = mealForm()
+            form = ChildForm()
     context = {
-        'child': child,
-        'form':  form
+        'form':form,
+        'mother':mother,
+        'child': child
     }
     return render(request,'choose_meal.html',context)
