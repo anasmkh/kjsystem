@@ -123,6 +123,7 @@ def chooseMeals(request,pk):
         else:
             form = mealForm()
     context = {
-        'form':form
+        'child': child,
+        'form':  form
     }
     return render(request,'choose_meal.html',context)

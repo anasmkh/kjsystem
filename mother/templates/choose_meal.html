@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Choose Meals for {{ child.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label>Meal:</label>
+        <br>
+        {{ form.name }}
+        <br>
+        <button type="submit">Confirm</button>
+    </form>
+</body>
+</html>
