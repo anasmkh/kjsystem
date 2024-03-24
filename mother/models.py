@@ -19,11 +19,17 @@ class Mother(models.Model):
 class Child(models.Model):
     meal_types = (('meat', 'Meat'),
                   ('milk', 'milk'))
+    gender = (
+        ('male','Male'),
+        ('female','Female')
+    )
     mom = models.ForeignKey(Mother,null=True,blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200,null=True,blank=True)
     age = models.CharField(max_length=200,null=True,blank=True)
+    child_gender = models.CharField(max_length=200, null=True, blank=True, choices=gender)
     featured_image = models.ImageField(null=True,blank=True,upload_to='staticfiles/images/',default='default.png')
     meal = models.CharField(max_length=200, null=True, blank=True, choices=meal_types)
+
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
