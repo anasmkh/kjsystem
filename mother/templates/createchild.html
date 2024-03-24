@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hotel_image</title>
+</head>
 <body>
-    <h1>Create Child for {{ mother.name }}</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        <label >Name:</label>
-        <br>
-        {{ form.name }}
-        <br>
-        <label >Age:</label>
-        <br>
-        {{ form.age }}
-        <br>
-        <button type="submit">Confirm</button>
-    </form>
+	<form method = "post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Upload</button>
+	</form>
 </body>
 </html>

@@ -65,7 +65,7 @@ def createChild(request,pk):
     mother = Mother.objects.get(id=pk)
     form = ChildForm()
     if request.method =='POST':
-        form = ChildForm(request.POST)
+        form = ChildForm(request.POST,request.FILES)
         if form.is_valid():
             child = form.save(commit=False)
             child.mom = mother
@@ -85,7 +85,7 @@ def updateChild(request,pk):
     child = mother.child_set.get(id=pk)
     form = ChildForm(instance=child)
     if request.method =='POST':
-        form = ChildForm(request.POST,instance=child)
+        form = ChildForm(request.POST,request.FILES,instance=child)
         if form.is_valid():
             child = form.save(commit=False)
             child.mom = mother
