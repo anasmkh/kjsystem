@@ -10,8 +10,8 @@
           <div class="toggle-menu__lines"></div>
         </label>
         <ul class="header__menu">
-          <li class="header__menuItem"><a href="{% url 'mother' %}">Developers</a></li>
-          <li class="header__menuItem"><a href="{% url 'progile' %}">Projects</a></li>
+          <li class="header__menuItem"><a href="{% url 'mother' %}">Mother</a></li>
+          <li class="header__menuItem"><a href="{% url 'teacher' %}">Teacher</a></li>
           <li class="header__menuItem"><a href="">Inbox</a></li>
 
           {% if request.user.is_authenticated %}

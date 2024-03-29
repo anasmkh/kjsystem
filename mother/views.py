@@ -32,6 +32,7 @@ def logoutUser(request):
 def registerUser(request):
     page = 'register'
     form = userCreation()
+
     if request.method == 'POST':
         form = userCreation(request.POST)
         if form.is_valid():
