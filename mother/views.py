@@ -1,13 +1,19 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect,reverse
+from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from mother.models import Mother,Child
 from mother.childform import ChildForm, userCreation
+from mother.decorators import *
 
+def home(request):
+    return render(request,'home.html')
 
+def main(request):
+    return render(request,'main.html')
+
+# @allowed_users(allowed_roles=['admin','mothers'])
 def loginUser(request):
-    page = 'login'
     if request.user.is_authenticated:
         return redirect('mother')
     else:
@@ -20,22 +26,26 @@ def loginUser(request):
         if user is not None:
             login(request,user)
             return redirect('mother')
+
         else:
+            return HttpResponse('Need Authentication')
             messages.error(request,'username or password is incorrect')
 
     return render(request,'login-register.html')
-
+@allowed_users(allowed_roles=['admin','mothers'])
 def logoutUser(request):
     logout(request)
     return redirect('login')
 
+@allowed_users(allowed_roles=['admin','mothers'])
 def registerUser(request):
     page = 'register'
+    type = 1
     form = userCreation()
+
     if request.method == 'POST':
         form = userCreation(request.POST)
         if form.is_valid():
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
@@ -44,7 +54,7 @@ def registerUser(request):
             return redirect('mother')
         else:
             messages.error(request,'Can\'t register')
-    context = {'page':page,'form':form}
+    context = {'type':type,'page':page,'form':form}
     return render(request,'login-register.html',context)
 
 @login_required(login_url='login')
@@ -52,7 +62,7 @@ def profile(request,pk):
     child = Child.objects.get(id=pk)
     conext = {'child':child}
     return render(request,'profile.html',conext)
-
+@allowed_users(allowed_roles=['admin','mothers'])
 @login_required(login_url='login')
 def mothers(request):
     mother = request.user.mother
@@ -130,3 +140,10 @@ def choose_meals(request,pk):
         'child': child
     }
     return render(request,'choose_meal.html',context)
+
+def readReport(request,pk):
+    child = Child.objects.get(id=pk)
+    report = child.report_set.all()
+
+    context = {'child':child,'report':report}
+    return render(request,'readreport.html',context)

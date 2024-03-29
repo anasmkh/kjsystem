@@ -1,6 +1,9 @@
 {% block content %}
 
+
 {% if page == 'register' %}
+
+<h2> Register as a Mother</h2>
 </form>
    <div class="auth">
       <div class="card">
@@ -12,13 +15,7 @@
 
         <form action="{% url 'register' %}" method="POST" class="form auth__form">
           {% csrf_token %}
-          {% for field in form %}
-          <div class="form__field">
-            <label for="formInput#text">{{field.label}} </label>
-            {{ field }}
-
-          </div>
-          {% endfor %}
+          {{ form.as_p }}
           <div class="auth__actions">
             <input class="btn btn--sub btn--lg" type="submit" value="Sign In" />
           </div>
@@ -30,6 +27,7 @@
       </div>
     </div>
 {% else %}
+<h2> Login as a Mother</h2>
 </form>
     <div class="auth">
       <div class="card">
@@ -75,4 +73,5 @@
       </div>
     </div>
 {% endif %}
+
 {% endblock %}

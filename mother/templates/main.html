@@ -1,9 +1,9 @@
-
-<body>
 {% block content %}
-   <li><a href="{% url 'login' %}">Login</a></li>
-    <li><a href="{% url 'register' %}">Register</a></li>
+
+<h2> You're Not Authorized to Login Now, Do You Have an Account??</h2>
+
+Login as a Mother <a href="{% url 'login' %}">here</a>
+<br>
+Login as a Teacher <a href="{% url 'loginteacher' %}">here</a>
 
 {% endblock %}
-
-</body>
