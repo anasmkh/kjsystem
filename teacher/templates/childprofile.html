@@ -1,0 +1,19 @@
+
+{% block content %}
+<h2>{{child.name}} Profile</h2>
+    <li>Child name: {{child.name}}</li>
+    <li>Child Age: {{child.age}}</li>
+<li>Child Gender: {{child.child_gender}}</li>
+
+    <img class="project__thumbnail" src="{{child.featured_image.url}}" alt="project thumbnail" />
+<br>
+<a href="">{{child.meal}}</a>
+<br>
+<a href="{% url 'createreport' child.id %}">Create Report for {{child.name}}</a>
+<br>
+<a href="{% url 'readreport' child.id %}">Read {{child.name}}'s Report</a>
+<br>
+
+<a href="{% url 'logout' %}">LogOut</a>
+{% endblock %}
+

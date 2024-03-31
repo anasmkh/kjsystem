@@ -1,0 +1,20 @@
+
+
+{% block content %}
+
+<h2> Welcom {{teacher.name}}</h2>
+{% csrf_token %}
+{% for child in children %}
+<table>
+    <tr>
+    <li> <a href="{% url 'childprofile' child.id %}"> {{child.name}}</a></li>
+    </tr>
+
+</table>
+<li><a href = "{% url 'logoutuser' %}">Logout</a></li>
+{% endfor %}
+
+
+
+
+{% endblock %}
