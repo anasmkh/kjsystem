@@ -40,7 +40,6 @@ def logoutUser(request):
 @allowed_users(allowed_roles=['admin','mothers'])
 def registerUser(request):
     page = 'register'
-    type = 1
     form = userCreation()
 
     if request.method == 'POST':
@@ -54,7 +53,7 @@ def registerUser(request):
             return redirect('mother')
         else:
             messages.error(request,'Can\'t register')
-    context = {'type':type,'page':page,'form':form}
+    context = {'page':page,'form':form}
     return render(request,'login-register.html',context)
 
 @login_required(login_url='login')
@@ -144,6 +143,21 @@ def choose_meals(request,pk):
 def readReport(request,pk):
     child = Child.objects.get(id=pk)
     report = child.report_set.all()
-
     context = {'child':child,'report':report}
     return render(request,'readreport.html',context)
+
+def addNotes(request,pk):
+    mother = request.user.mother
+    child = mother.child_set.get(id=pk)
+    form  = ChildForm(instance=child)
+    if request.method == 'POST':
+        form = ChildForm(request.POST,instance=child)
+        if form.is_valid():
+            child = form.save(commit=False)
+            child.mom = mother
+            child.save()
+            return redirect('mother')
+        else:
+            form = ChildForm()
+    context = {'mother':mother,'child':child,'form':form}
+    return render(request,'notes.html',context)

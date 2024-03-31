@@ -30,6 +30,7 @@ class Child(models.Model):
     child_gender = models.CharField(max_length=200, null=True, blank=True, choices=gender)
     featured_image = models.ImageField(null=True,blank=True,upload_to='staticfiles/images/',default='default.png')
     meal = models.CharField(max_length=200, null=True, blank=True, choices=meal_types)
+    notes = models.CharField(max_length=200,null=True,blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):

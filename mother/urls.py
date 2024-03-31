@@ -11,5 +11,6 @@ urlpatterns = [
     path('deleteChild/<str:pk>/',views.deleteChild,name='deletechild'),
     path('choose_meals/<str:pk>/',views.choose_meals,name='meals'),
     path('',views.home,name='home'),
-    path('main',views.main,name='main')
+    path('main',views.main,name='main'),
+    path('addNotes/<str:pk>/',views.addNotes,name='addnotes')
 ]

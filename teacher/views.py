@@ -90,3 +90,8 @@ def readReport(request,pk):
     report = child.report_set.all()
     context = {'child':child,'report':report}
     return render(request,'readreport.html',context)
+
+def readNotes(request,pk):
+    child = Child.objects.get(id=pk)
+    context = {'child':child}
+    return render(request,'readnotes.html',context)
