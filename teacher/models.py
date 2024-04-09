@@ -13,7 +13,7 @@ class Teacher(models.Model):
     email = models.CharField(max_length=200,null=True,blank=True)
     phone = models.CharField(max_length=200,null=True,blank=True)
     address = models.CharField(max_length=200,null=True,blank=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True, editable=False)
+    
 
     def __str__(self):
         return str(self.user)
@@ -22,10 +22,9 @@ class Report(models.Model):
 
     child = models.ForeignKey(Child,on_delete=models.CASCADE,null=True,blank=True)
     text = models.TextField(max_length=2000, null=True, blank=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True, editable=False)
-    # created = models.DateTimeField(auto_now_add=True,editable=False)
+    
+    
     def __str__(self):
         return str(self.text)
 
-    # def __str__(self):
-    #     return str(self.created)
+ 

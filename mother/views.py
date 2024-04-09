@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from mother.models import Mother,Child
-from mother.childform import ChildForm, userCreation
+from mother.childform import ChildForm, userCreation,mealForm,noteForm
 from mother.decorators import *
 
 def home(request):
@@ -12,8 +12,9 @@ def home(request):
 def main(request):
     return render(request,'main.html')
 
-# @allowed_users(allowed_roles=['admin','mothers'])
+@allowed_users(allowed_roles=['admin','mothers'])
 def loginUser(request):
+    page = 'login'
     if request.user.is_authenticated:
         return redirect('mother')
     else:
@@ -30,8 +31,7 @@ def loginUser(request):
         else:
             return HttpResponse('Need Authentication')
             messages.error(request,'username or password is incorrect')
-
-    return render(request,'login-register.html')
+    return render(request,'login-register.html',{'page':page})
 @allowed_users(allowed_roles=['admin','mothers'])
 def logoutUser(request):
     logout(request)
@@ -61,6 +61,8 @@ def profile(request,pk):
     child = Child.objects.get(id=pk)
     conext = {'child':child}
     return render(request,'profile.html',conext)
+    
+
 @allowed_users(allowed_roles=['admin','mothers'])
 @login_required(login_url='login')
 def mothers(request):
@@ -122,9 +124,9 @@ def deleteChild(request,pk):
 def choose_meals(request,pk):
     mother = request.user.mother
     child = mother.child_set.get(id=pk)
-    form = ChildForm(instance=child)
+    form = mealForm(instance=child)
     if request.method =='POST':
-        form = ChildForm(request.POST,instance=child)
+        form = mealForm(request.POST,instance=child)
         if form.is_valid():
             child = form.save(commit=False)
             child.mom = mother
@@ -132,7 +134,7 @@ def choose_meals(request,pk):
             messages.success(request, 'This Meal Choosen Successfully!')
             return redirect('mother')
         else:
-            form = ChildForm()
+            form = mealForm()
     context = {
         'form':form,
         'mother':mother,
@@ -149,15 +151,15 @@ def readReport(request,pk):
 def addNotes(request,pk):
     mother = request.user.mother
     child = mother.child_set.get(id=pk)
-    form  = ChildForm(instance=child)
+    form  = noteForm(instance=child)
     if request.method == 'POST':
-        form = ChildForm(request.POST,instance=child)
+        form = noteForm(request.POST,instance=child)
         if form.is_valid():
             child = form.save(commit=False)
             child.mom = mother
             child.save()
             return redirect('mother')
         else:
-            form = ChildForm()
+            form = noteForm()
     context = {'mother':mother,'child':child,'form':form}
     return render(request,'notes.html',context)

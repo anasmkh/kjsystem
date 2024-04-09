@@ -12,9 +12,15 @@ class userCreation(UserCreationForm):
 class ChildForm(forms.ModelForm):
     class Meta:
         model = Child
-        fields = '__all__'
+        fields = ['name','age','child_gender','featured_image']
+        
 
-# class mealForm(forms.ModelForm):
-#     class Meta:
-#         model: Meal
-#         fields = '__all__'
+class mealForm(forms.ModelForm):
+    class Meta:
+        model =  Child
+        fields = ['name','meal']
+
+class noteForm(forms.ModelForm):
+    class Meta:
+        model = Child
+        fields = ['name','notes']

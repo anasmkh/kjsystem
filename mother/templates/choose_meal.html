@@ -3,20 +3,23 @@
 
 <body>
 
-
     <form method="post">
         {% csrf_token %}
+       
          <h1>choose meal for {{child.name}}</h1>
-        <br>
-        <label >Name:</label>
-        <br>
-        {{ form.name }}
-        <br>
-        <label >Meal:</label>
-        <br>
-        {{ form.meal }}
-        <br>
-        <button type="submit">Confirm</button>
+      
+            <input type="hidden" name="name" value="{{ child.name }}">
+            <br>
+            <input type="hidden" name="age" value="{{ child.age }}">
+            <br>
+            <input type="hidden" name="gender" value="{{ child.gender }}"> 
+            <br>
+            Choose Meal:{{form.meal}}
+            <br>
+            <button type="submit">Confirm</button>
+    
+
+  
     </form>
 </body>
 </html>
