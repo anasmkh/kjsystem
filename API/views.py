@@ -4,6 +4,7 @@ from mother.models import Mother , Child
 from teacher.models import Teacher
 from API.serializers import *
 
+##APIs
 @api_view(['GET'])
 def getMoms(request):
     mothers = Mother.objects.all()

@@ -21,3 +21,8 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = '__all__'
+
+class MomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mother
+        fields = ['notes']
