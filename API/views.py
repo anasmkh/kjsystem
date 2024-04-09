@@ -76,10 +76,3 @@ def createReport(request):
         print('sucess!!')
     return Response(serializer.data)
 
-# @api_view(['POST'])
-# def addNote(request,pk):
-#     child = Child.objects.get(id=pk)
-#     serializer = NoteSerializer(instance=child, data=request.data)
-#     if serializer.is_valid():
-#         serializer.save
-#     return Response(serializer.data)

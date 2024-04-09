@@ -21,8 +21,3 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = '__all__'
-
-# class NoteSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Child
-#         fields = ['notes']

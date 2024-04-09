@@ -16,7 +16,6 @@ urlpatterns =[
     path('/deletechild/<str:pk>/',views.deleteChild),
     path('/readreport/<str:pk>/',views.readReport),
     path('/createreport/',views.createReport),
-    # path('/addnote/<str:pk>/',views.addNote),
 ]
 
     
