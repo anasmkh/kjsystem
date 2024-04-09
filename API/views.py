@@ -73,6 +73,5 @@ def createReport(request):
     serializer = ReportSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        print('sucess!!')
     return Response(serializer.data)
 
