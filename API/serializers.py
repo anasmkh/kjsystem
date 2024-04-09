@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from mother.models import Mother,Child
 from teacher.models import Teacher,Report
-
+from mother.models import *
 class MotherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mother
